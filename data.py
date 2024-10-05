@@ -71,7 +71,7 @@ class MarketData:
             cursor = conn.cursor()
             cursor.execute("SELECT * FROM RUNE_USDT_prices")
             rows = cursor.fetchall()
-            
+            print(rows)
             return rows
             
         except Exception as e:
@@ -79,7 +79,10 @@ class MarketData:
         finally:
             conn.close()
 
-market = MarketData()
-ohlcv = market.fetch_data()
-#market.save_to_db(ohlcv)
-#market.read_from_db()
+if __name__ == "__main__":ls
+
+    market = MarketData()
+    ohlcv = market.fetch_data()
+    #market.save_to_db(ohlcv)
+    market.read_from_db()
+
