@@ -14,15 +14,15 @@ class MarketData:
             'enableRateLimit': True,
             'options': {
                 'defaultType': 'future'
-            },
-            'urls': {
-                'api': {
-                    'fapiPublic': 'https://testnet.binancefuture.com/fapi/v1',
-                    'fapiPrivate': 'https://testnet.binancefuture.com/fapi/v1',
-                },
             }
         })
-        self.exchange.set_sandbox_mode(True)
+            #'urls': {
+            #    'api': {
+            #        'fapiPublic': 'https://testnet.binancefuture.com/fapi/v1',
+            #        'fapiPrivate': 'https://testnet.binancefuture.com/fapi/v1',
+            #    }}
+
+        #self.exchange.set_sandbox_mode(True)
 
     def fetch_data(self, limit=1):
         logger.info("Fetching price data")
@@ -41,7 +41,6 @@ class MarketData:
             cursor = conn.cursor()
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS RUNE_USDT_prices (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
                     timestamp TEXT,
                     open REAL,
                     high REAL,
@@ -66,6 +65,7 @@ class MarketData:
             conn.close()
 
     def read_from_db(self):
+        logger.info("Reading price data")
         try:
             conn = sqlite3.connect('data.db', check_same_thread=False)
             cursor = conn.cursor()
@@ -79,10 +79,11 @@ class MarketData:
         finally:
             conn.close()
 
-if __name__ == "__main__":ls
+if __name__ == "__main__":
 
     market = MarketData()
     ohlcv = market.fetch_data()
-    #market.save_to_db(ohlcv)
+    #print(ohlcv)
+    market.save_to_db(ohlcv)
     market.read_from_db()
 
