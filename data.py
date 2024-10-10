@@ -78,12 +78,23 @@ class MarketData:
         finally:
             conn.close()
 
+    def get_current_price(self, symbol):
+        """Fetches the current price for the given symbol."""
+        try:
+            ticker = self.exchange.fetch_ticker(symbol)
+            return ticker['last']
+        except Exception as e:
+            logger.error(f"Error fetching current price for {symbol}: {e}")
+            return None
+
 """
 if __name__ == "__main__":
 
     market = MarketData()
     ohlcv = market.fetch_data()
-    #print(ohlcv)
-    market.save_to_db(ohlcv)
-    market.read_from_db()
+    print(ohlcv)
+    data = market.save_to_db(ohlcv)
+    print(data)
+    read = market.read_from_db()
+    print(read)
 """

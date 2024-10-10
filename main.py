@@ -11,7 +11,8 @@ if __name__ == '__main__':
             logging.StreamHandler()  # Output logs to the console
         ]
     )
-    
+    # Set the logging level for the 'httpx' logger to WARNING to suppress info-level logs
+    logging.getLogger('httpx').setLevel(logging.WARNING)
     # Create instances of the trading engine and bot
     engine = TradingEngine()
     bot = TelegramBot(engine)

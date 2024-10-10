@@ -104,7 +104,6 @@ class TradingEngine:
     def get_balance(self) -> Optional[float]:
         """Returns the balance in USDT. For dry run, returns the simulated balance."""
         if self.dry_run:
-            print(self.simulated_balance)
             return self.simulated_balance
         try:
             balance = self.market_data.exchange.fetch_balance()
@@ -121,7 +120,6 @@ class TradingEngine:
         """Calculates the order size based on balance, price, and risk percentage."""
         risk_amount = usdt_balance * (risk_percentage / 100)
         order_size = risk_amount / current_price
-        print(order_size)
         return order_size
 
     def place_order(self, side: str, amount: float) -> Optional[Dict[str, Union[int, str, float]]]:
@@ -226,6 +224,14 @@ class TradingEngine:
         """Stops the trading engine."""
         self.is_running = False
 
-#engine = TradingEngine(dry_run=True)
-#engine.get_balance()
-#engine.calc_order(1000.0, 4.925)
+"""
+if __name__ == '__main__':
+
+    engine = TradingEngine(dry_run=True)
+    bal = engine.get_balance()
+    print(bal)
+    order = engine.calc_order(1000.0, 4.925)
+    print(order)
+    engine_test_price = engine.place_order('buy', 100)
+    print(engine_test_price)
+"""
