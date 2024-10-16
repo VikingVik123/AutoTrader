@@ -6,7 +6,6 @@ from data import MarketData
 from strategy import Strategy
 import time
 import threading
-from monitor import TradeMonitor
 
 class TradingEngine:
     def __init__(self, dry_run: bool = True) -> None:
@@ -21,7 +20,6 @@ class TradingEngine:
         
         # Initialize database and create table if it doesn't exist
         self.initialize_database()
-        self.trade_monitor = TradeMonitor()
 
     def initialize_database(self) -> None:
         """Initializes the database and creates the closed_trades table if it does not exist."""
@@ -302,7 +300,7 @@ class TradingEngine:
         else:
             return "No open positions currently."
 
-
+"""
 if __name__ == '__main__':
 
     engine = TradingEngine(dry_run=True)
@@ -316,3 +314,4 @@ if __name__ == '__main__':
     print(close)
     stat = engine.get_trade_status()
     print(stat)
+"""
