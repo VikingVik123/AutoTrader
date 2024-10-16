@@ -19,8 +19,9 @@ class TelegramBot:
         self.application.add_handler(CommandHandler("positions", self.positions))
         self.application.add_handler(CommandHandler("runbot", self.runbot))
         self.application.add_handler(CommandHandler("stopbot", self.stopbot))
+        self.application.add_handler(CommandHandler("status", self.status))
 
-        self.reply_keyboard = [['/start', '/stats', '/stop'], ['/balance', '/positions'], ['/runbot', '/stopbot']]
+        self.reply_keyboard = [['/start', '/stats', '/stop'], ['/balance', '/positions', '/status'], ['/runbot', '/stopbot']]
         self.reply_markup = ReplyKeyboardMarkup(self.reply_keyboard, resize_keyboard=True)
 
     async def start(self, update: Update, context: CallbackContext) -> None:
@@ -58,6 +59,14 @@ class TelegramBot:
         except Exception as e:
             logging.error(f"Error fetching positions: {e}")
             await update.message.reply_text("An error occurred while fetching open positions.")
+
+    async def status(self, update: Update, context: CallbackContext) -> None:
+        try:
+            status = self.trading_engine.get_trade_status()
+            await update.message.reply_text(status)
+        except Exception as e:
+            logging.error(f"Error fetching status: {e}")
+            await update.message.reply_text("An error occurred while fetching the status.")
 
     async def runbot(self, update: Update, context: CallbackContext) -> None:
         with self.lock:
