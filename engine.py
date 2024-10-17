@@ -300,18 +300,3 @@ class TradingEngine:
         else:
             return "No open positions currently."
 
-"""
-if __name__ == '__main__':
-
-    engine = TradingEngine(dry_run=True)
-    bal = engine.get_balance()
-    print(bal)
-    order = engine.calc_order(1000.0, 4.925)
-    print(order)
-    engine_test_price = engine.place_order('buy', 100)
-    print(engine_test_price)
-    close = engine.close_orders('sell')
-    print(close)
-    stat = engine.get_trade_status()
-    print(stat)
-"""

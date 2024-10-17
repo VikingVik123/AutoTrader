@@ -87,14 +87,3 @@ class MarketData:
             logger.error(f"Error fetching current price for {symbol}: {e}")
             return None
 
-"""
-if __name__ == "__main__":
-
-    market = MarketData()
-    ohlcv = market.fetch_data()
-    print(ohlcv)
-    data = market.save_to_db(ohlcv)
-    print(data)
-    read = market.read_from_db()
-    print(read)
-"""

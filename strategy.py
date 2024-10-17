@@ -73,15 +73,3 @@ class Strategy:
             (df['close'] > df['ST_short']),
             'exit_short'] = 1
         return df
-
-"""
-strat = Strategy()
-df = strat.read_price()
-print(df)
-ind = strat.calc_indicators(df)
-print(ind)
-ent = strat.entry_signals(df)
-print(ent)
-exit = strat.exit_signals(df)
-print(exit)
-"""
