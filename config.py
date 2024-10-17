@@ -1,5 +1,3 @@
 API_KEY = ""
 API_SECRET = ""
 TELEGRAM_TOKEN = ""
-#API_KEY = ""
-#API_SECRET = ""
